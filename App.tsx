@@ -11,6 +11,7 @@ import GroupPage from './screens/GroupPage';
 import { Provider } from 'react-redux';
 import { Store } from './redux/store';
 import Gallery from './screens/Gallery';
+import BottomTabNavigator from './components/navigator/BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,25 +37,9 @@ function App(): JSX.Element {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="MyInfo"
-              component={MyInfo}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="GroupPage"
-              component={GroupPage}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Gallery"
-              component={Gallery}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
               name="Main"
-              component={Main}
-              // options={{ headerShown: false }}
+              component={BottomTabNavigator}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

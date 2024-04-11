@@ -73,7 +73,6 @@ export default function Main({ navigation }: any) {
           description={'내위치'}
         />
       </MapView>
-      <Menu navigation={navigation} />
     </>
   );
 }
