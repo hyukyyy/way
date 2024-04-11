@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { Const } from '../const';
 
-export const defaultRequestConfig = {
-  headers: {
-    Accept: 'application/json; charset=utf-8',
-    'Content-Type': 'application/json; charset=utf-8',
-  },
+export const defaultRequestConfig = (token: string) => {
+  return {
+    headers: {
+      Accept: 'application/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    },
+  };
 };
 
 export const makeUrl = (path: string, params: object): string => {
@@ -23,26 +26,44 @@ export const makeUrl = (path: string, params: object): string => {
   return apiUrl;
 };
 
-export const httpGet = async (path: string, params: object) => {
+export const httpGet = async (path: string, params: object, token: string) => {
   try {
-    return await axios.get(makeUrl(path, params), defaultRequestConfig);
+    return await axios.get(makeUrl(path, params), defaultRequestConfig(token));
   } catch (e) {
     throw e;
   }
 };
 
-export const httpPost = async (path: string, params: object, data: object) => {
+export const httpPost = async (
+  path: string,
+  params: object,
+  data: object,
+  token: string,
+) => {
   try {
-    return await axios.post(makeUrl(path, params), data, defaultRequestConfig);
+    return await axios.post(
+      makeUrl(path, params),
+      data,
+      defaultRequestConfig(token),
+    );
   } catch (e) {
     console.error(`Error while ${makeUrl(path, params)}`, e);
     throw e;
   }
 };
 
-export const httpPut = async (path: string, params: object, data: object) => {
+export const httpPut = async (
+  path: string,
+  params: object,
+  data: object,
+  token: string,
+) => {
   try {
-    return await axios.put(makeUrl(path, params), data, defaultRequestConfig);
+    return await axios.put(
+      makeUrl(path, params),
+      data,
+      defaultRequestConfig(token),
+    );
   } catch (e) {
     throw e;
   }
@@ -51,4 +72,7 @@ export const httpPut = async (path: string, params: object, data: object) => {
 export const httpPaths = {
   signup: '/user/signup',
   login: '/auth/authenticate',
+
+  // group
+  getUserGroup: '/user/group',
 };

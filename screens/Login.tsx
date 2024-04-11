@@ -10,8 +10,12 @@ import { emailValidator } from '../utils/validators/emailValidator';
 import { passwordValidator } from '../utils/validators/passwordValidator';
 import Logo from '../components/common/Logo';
 import { httpPaths, httpPost } from '../api/httpClient';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../redux/reducer/UserReducer';
 
 const Login = ({ navigation }: any) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
 
@@ -33,10 +37,12 @@ const Login = ({ navigation }: any) => {
           username: email.value,
           password: password.value,
         },
+        '',
       );
       console.log(loginRes);
 
       if (loginRes.data.token !== null && undefined !== loginRes.data.token) {
+        dispatch(setAccessToken({ accessToken: loginRes.data.token }));
         navigation.reset({
           index: 0,
           routes: [{ name: 'Main' }],

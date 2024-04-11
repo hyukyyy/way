@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import MapView from 'react-native-maps';
-import { getCurrentPosition } from 'react-native-geolocation-service';
+import Geolocation from 'react-native-geolocation-service';
 import { Marker } from 'react-native-maps';
 import { check, request, RESULTS, PERMISSIONS } from 'react-native-permissions';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Menu from '../components/main/Menu';
+import { useFocusEffect } from '@react-navigation/native';
 
-export default function Main() {
+export default function Main({ navigation }: any) {
   const [myLocation, setMyLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -19,7 +20,7 @@ export default function Main() {
   };
 
   const setMyLocationToCurrentLocation = () => {
-    getCurrentPosition(
+    Geolocation.getCurrentPosition(
       (position) => {
         console.log(position);
         setMyLocation({
@@ -34,28 +35,26 @@ export default function Main() {
     );
   };
 
-  useEffect(() => {
-    const onMount = async () => {
-      const fineLocationPermission = await check(
-        'android.permission.ACCESS_FINE_LOCATION',
-      );
-      const hasLocationPermission =
-        RESULTS.GRANTED === fineLocationPermission ? true : false;
-
-      if (hasLocationPermission) {
-        setMyLocationToCurrentLocation();
-      } else {
-        const requestPermission = await request(
-          PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+  useFocusEffect(
+    useCallback(() => {
+      const onMount = async () => {
+        const fineLocationPermission = await check(
+          'android.permission.ACCESS_FINE_LOCATION',
         );
+        const hasLocationPermission =
+          RESULTS.GRANTED === fineLocationPermission ? true : false;
 
-        if (RESULTS.GRANTED === requestPermission ? true : false) {
+        if (hasLocationPermission) {
           setMyLocationToCurrentLocation();
+        } else {
+          const requestPermission = await request(
+            PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+          );
         }
-      }
-    };
-    onMount();
-  }, []);
+      };
+      onMount();
+    }, []),
+  );
 
   return (
     <>
@@ -69,13 +68,12 @@ export default function Main() {
         onRegionChange={onRegionChange}
       >
         <Marker
-          // key={index}
           coordinate={myLocation}
           title={'내위치'}
           description={'내위치'}
         />
-        <Menu />
       </MapView>
+      <Menu navigation={navigation} />
     </>
   );
 }
@@ -83,7 +81,5 @@ export default function Main() {
 const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
   },
 });

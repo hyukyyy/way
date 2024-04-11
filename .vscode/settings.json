@@ -1,4 +1,5 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "prettier.semi": true
+  "java.compile.nullAnalysis.mode": "automatic",
+  "prettier.semi": true,
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

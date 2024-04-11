@@ -1,6 +1,6 @@
 export const Const = {
   apiServerProtocol: 'http',
-  apiServerHost: '192.168.35.93',
+  apiServerHost: '192.168.55.191',
   apiServerPort: 8080,
 
   mapServerProtocol: 'http',
