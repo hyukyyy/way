@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Main from '../../screens/Main';
 import { Icon } from 'react-native-paper';
+import MyInfo from '../../screens/MyInfo';
+import Gallery from '../../screens/Gallery';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,7 +13,7 @@ export default function BottomTabNavigator() {
     <NavigationContainer independent={true}>
       <Tab.Navigator initialRouteName="Main">
         <Tab.Screen
-          name="Main1"
+          name="Main"
           component={Main}
           options={{
             tabBarShowLabel: false,
@@ -31,8 +33,8 @@ export default function BottomTabNavigator() {
         />
 
         <Tab.Screen
-          name="Main3"
-          component={Main}
+          name="Gallery"
+          component={Gallery}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => <Icon source={'plus-circle-outline'} size={45} />,
@@ -51,8 +53,8 @@ export default function BottomTabNavigator() {
         />
 
         <Tab.Screen
-          name="Main5"
-          component={Main}
+          name="MyInfo"
+          component={MyInfo}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => <Icon source={'account-outline'} size={45} />,
