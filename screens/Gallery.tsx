@@ -203,6 +203,7 @@ const Gallery = () => {
               {isMulti && (
                 <TouchableOpacity
                   onPress={() => {
+                    if (selectedImgMulti.length >= 5) return;
                     if (!isSelected) {
                       setSelectedImgMulti([...selectedImgMulti, item]);
                     } else {
