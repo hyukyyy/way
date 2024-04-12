@@ -2,9 +2,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Main from '../../screens/Main';
-import { Icon } from 'react-native-paper';
+import { Icon, Text } from 'react-native-paper';
 import MyInfo from '../../screens/MyInfo';
 import Gallery from '../../screens/Gallery';
+import { theme } from '../../styles/themes/theme';
+import { TouchableOpacity } from 'react-native';
+import PostStackNavigator from './PostStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,9 +36,10 @@ export default function BottomTabNavigator() {
         />
 
         <Tab.Screen
-          name="Gallery"
-          component={Gallery}
+          name="Post"
+          component={PostStackNavigator}
           options={{
+            headerShown: false,
             tabBarShowLabel: false,
             tabBarIcon: () => <Icon source={'plus-circle-outline'} size={45} />,
             unmountOnBlur: true,

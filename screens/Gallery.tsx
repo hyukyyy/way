@@ -19,7 +19,7 @@ import { theme } from '../styles/themes/theme';
 
 const vw = Dimensions.get('window').width;
 
-const Gallery = () => {
+const Gallery = ({ navigation }: any) => {
   useEffect(() => {
     permissionCheck();
   }, []);
@@ -38,6 +38,7 @@ const Gallery = () => {
         try {
           const { edges } = await CameraRoll.getPhotos({
             first: 30,
+            include: ['location'],
           });
 
           if (Array.isArray(edges)) {
@@ -57,6 +58,37 @@ const Gallery = () => {
       setSelectedImgMulti([]);
     }
   }, [isMulti]);
+
+  useEffect(() => {
+    const styles = StyleSheet.create({
+      headerNextBtnWrapper: { marginRight: 10 },
+      headerNextBtnText: {
+        color: theme.colors.primary,
+        fontWeight: 'bold',
+        fontSize: 15,
+      },
+    });
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
+    const headerRight = () => {
+      return (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('Post', {
+              imgList: isMulti ? selectedImgMulti : [selectedImg],
+            })
+          }
+          style={[styles.headerNextBtnWrapper]}
+        >
+          <Text style={[styles.headerNextBtnText]}>next</Text>
+        </TouchableOpacity>
+      );
+    };
+
+    navigation.setOptions({
+      headerRight: headerRight,
+    });
+  }, [navigation, isMulti, selectedImg, selectedImgMulti]);
 
   const permissionCheck = () => {
     if (Platform.OS !== 'ios' && Platform.OS !== 'android') return;
@@ -107,7 +139,7 @@ const Gallery = () => {
       height: '100%',
     },
     menuBtn1: {
-      backgroundColor: isMulti ? theme.colors.secondary : 'grey',
+      backgroundColor: isMulti ? theme.colors.primary : 'grey',
       borderRadius: 100,
       width: 35,
       height: 35,
@@ -131,7 +163,7 @@ const Gallery = () => {
       borderWidth: 0.5,
     },
     numbering: {
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.primary,
       position: 'absolute',
       top: 5,
       right: 5,
@@ -160,7 +192,6 @@ const Gallery = () => {
       justifyContent: 'center',
       alignItems: 'center',
     },
-
     whiteText: {
       color: 'white',
     },

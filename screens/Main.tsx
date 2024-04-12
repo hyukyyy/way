@@ -4,7 +4,6 @@ import Geolocation from 'react-native-geolocation-service';
 import { Marker } from 'react-native-maps';
 import { check, request, RESULTS, PERMISSIONS } from 'react-native-permissions';
 import { StyleSheet } from 'react-native';
-import Menu from '../components/main/Menu';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function Main({ navigation }: any) {
@@ -47,9 +46,7 @@ export default function Main({ navigation }: any) {
         if (hasLocationPermission) {
           setMyLocationToCurrentLocation();
         } else {
-          const requestPermission = await request(
-            PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
-          );
+          await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
         }
       };
       onMount();

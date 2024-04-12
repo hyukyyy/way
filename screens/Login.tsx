@@ -1,4 +1,4 @@
-import { Modal, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Background from '../components/common/Background';

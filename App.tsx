@@ -5,12 +5,8 @@ import Login from './screens/Login';
 import { PaperProvider } from 'react-native-paper';
 import Signup from './screens/Signup';
 import ResetPassword from './screens/ResetPassword';
-import Main from './screens/Main';
-import MyInfo from './screens/MyInfo';
-import GroupPage from './screens/GroupPage';
 import { Provider } from 'react-redux';
 import { Store } from './redux/store';
-import Gallery from './screens/Gallery';
 import BottomTabNavigator from './components/navigator/BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
