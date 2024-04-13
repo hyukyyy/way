@@ -12,7 +12,36 @@ export default function GroupPage() {
     (state: RootState) => state.userReducer.accessToken,
   );
 
-  const [groups, setGroups] = useState([]);
+  // groupId: number;
+  // name: string;
+  // isPremium: boolean;
+  // users: {
+  //     userId: number;
+  //     username: string;
+  //     password: null;
+  //     nickname: string;
+  //     activated: boolean;
+  //     groups: never[];
+  //     authorities: string[];
+  // }[];
+  const [groups, setGroups] = useState([
+    {
+      groupId: 1,
+      name: '테스트 그룹1',
+      isPremium: false,
+      users: [
+        {
+          userId: 1,
+          username: 'ftkem2003',
+          password: null,
+          nickname: 'hyukyyy',
+          activated: true,
+          groups: [],
+          authorities: ['ROLE_USER'],
+        },
+      ],
+    },
+  ]);
 
   useEffect(() => {
     const getUserGroup = async () => {
@@ -22,7 +51,7 @@ export default function GroupPage() {
         if (res?.data == null) {
           return;
         } else {
-          setGroups(res?.data?.groups);
+          // setGroups(res?.data?.groups);
         }
       } catch (e) {
         console.error(e);
@@ -34,30 +63,34 @@ export default function GroupPage() {
 
   const renderItem = ({ item }: { item: GroupInterface }) => {
     return (
-      <View>
-        <Text>{item?.name}</Text>
+      <View style={[styles.itemContainer]}>
+        <Text style={[styles.itemTitle]}>{item?.name}</Text>
+        <View>
+          <Text>상세</Text>
+        </View>
       </View>
     );
   };
 
   return (
     <View>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Groups</Text>
-      </View>
       <FlatList data={groups} renderItem={renderItem} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    padding: 20,
-    backgroundColor: theme.colors.secondary,
+  itemContainer: {
+    backgroundColor: theme.colors.primaryContainer,
+    borderRadius: 5,
+    marginHorizontal: 5,
   },
-  headerText: {
+  itemTitle: {
+    backgroundColor: theme.colors.secondary,
     fontWeight: 'bold',
-    fontSize: 16,
-    color: theme.colors.primary,
+    fontSize: 20,
+    paddingHorizontal: 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
   },
 });

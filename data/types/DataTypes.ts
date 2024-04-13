@@ -8,9 +8,9 @@ export interface GroupInterface {
 export interface UserInterface {
   userId: number;
   username: string;
-  password: string;
+  password: string | null;
   nickname: string;
-  activated: string;
+  activated: boolean;
   groups: GroupInterface[];
   authorities: AuthorityInterface[];
 }

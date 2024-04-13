@@ -2,12 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Main from '../../screens/Main';
-import { Icon, Text } from 'react-native-paper';
+import { Icon } from 'react-native-paper';
 import MyInfo from '../../screens/MyInfo';
-import Gallery from '../../screens/Gallery';
-import { theme } from '../../styles/themes/theme';
-import { TouchableOpacity } from 'react-native';
 import PostStackNavigator from './PostStackNavigator';
+import GroupPage from '../../screens/GroupPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,8 +45,8 @@ export default function BottomTabNavigator() {
         />
 
         <Tab.Screen
-          name="Main4"
-          component={Main}
+          name="GroupPage"
+          component={GroupPage}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: () => <Icon source={'account'} size={45} />,
