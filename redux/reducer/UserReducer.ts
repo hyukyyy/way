@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // User에서 관리해야하는 Slice
 const initialState = {
   accessToken: '',
+  refreshToken: '',
 };
 
 /**
@@ -15,6 +16,13 @@ export const UserSlice = createSlice({
     // 모든 사용자 정보를 상태에 저장합니다.
     setAccessToken(state, action) {
       state.accessToken = action.payload.accessToken;
+    },
+    setRefreshToken(state, action) {
+      state.refreshToken = action.payload.refreshToken;
+    },
+    setAccessTokenAndRefreshToken(state, action) {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
   },
 });
