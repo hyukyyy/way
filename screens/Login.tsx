@@ -12,8 +12,10 @@ import Logo from '../components/common/Logo';
 import { httpPaths, httpPost } from '../api/httpClient';
 import { useDispatch } from 'react-redux';
 import { setAccessToken } from '../redux/reducer/UserReducer';
+import { useNavigation } from '@react-navigation/native';
 
-const Login = ({ navigation }: any) => {
+const Login = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState({ value: '', error: '' });
@@ -45,7 +47,7 @@ const Login = ({ navigation }: any) => {
         dispatch(setAccessToken({ accessToken: loginRes.data.token }));
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Main' }],
+          routes: [{ name: 'Main' as never }],
         });
       }
     } catch (e) {
@@ -81,7 +83,7 @@ const Login = ({ navigation }: any) => {
         />
         <View style={styles.forgotPassword}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ResetPassword')}
+            onPress={() => navigation.navigate('ResetPassword' as never)}
           >
             <Text style={styles.forgot}>Forgot your password?</Text>
           </TouchableOpacity>
@@ -91,7 +93,9 @@ const Login = ({ navigation }: any) => {
         </Button>
         <View style={styles.row}>
           <Text>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Signup' as never)}
+          >
             <Text style={styles.link}>Sign up</Text>
           </TouchableOpacity>
         </View>

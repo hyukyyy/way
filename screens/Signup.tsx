@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Modal, Portal, Text } from 'react-native-paper';
 import { nameValidator } from '../utils/validators/nameValidator';
 import { emailValidator } from '../utils/validators/emailValidator';
@@ -19,7 +19,7 @@ export default function Signup({ navigation }: any) {
   const [password, setPassword] = useState({ value: '', error: '' });
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalMsg, setModalMsg] = useState(null);
+  const [modalMsg, setModalMsg] = useState<string | null>(null);
 
   const onSignUpPressed = async () => {
     const nameError = nameValidator(name.value);
@@ -41,8 +41,9 @@ export default function Signup({ navigation }: any) {
           password: password.value,
           nickname: name.value,
         },
+        null,
       );
-    } catch (e) {
+    } catch (e: any) {
       console.error(e.response);
       setModalMsg('회원가입에 실패했습니다.');
     }

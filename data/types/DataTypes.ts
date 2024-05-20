@@ -12,9 +12,5 @@ export interface UserInterface {
   nickname: string;
   activated: boolean;
   groups: GroupInterface[];
-  authorities: AuthorityInterface[];
-}
-
-export interface AuthorityInterface {
-  authorityName: string;
+  authorities: string[];
 }

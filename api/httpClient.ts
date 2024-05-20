@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Const } from '../const';
 
-export const defaultRequestConfig = (token: string) => {
+export const defaultRequestConfig = (token: string | null) => {
   return {
     headers: {
       Accept: 'application/json; charset=utf-8',
       'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : null,
     },
   };
 };
@@ -38,7 +38,7 @@ export const httpPost = async (
   path: string,
   params: object,
   data: object,
-  token: string,
+  token: string | null,
 ) => {
   try {
     return await axios.post(

@@ -12,19 +12,7 @@ export default function GroupPage() {
     (state: RootState) => state.userReducer.accessToken,
   );
 
-  // groupId: number;
-  // name: string;
-  // isPremium: boolean;
-  // users: {
-  //     userId: number;
-  //     username: string;
-  //     password: null;
-  //     nickname: string;
-  //     activated: boolean;
-  //     groups: never[];
-  //     authorities: string[];
-  // }[];
-  const [groups] = useState([
+  const [groups] = useState<GroupInterface[]>([
     {
       groupId: 1,
       name: '테스트 그룹1',
@@ -58,7 +46,7 @@ export default function GroupPage() {
       }
     };
 
-    getUserGroup();
+    getUserGroup().then(() => {});
   }, [token]);
 
   const renderItem = ({ item }: { item: GroupInterface }) => {
