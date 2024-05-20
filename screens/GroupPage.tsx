@@ -24,7 +24,7 @@ export default function GroupPage() {
   //     groups: never[];
   //     authorities: string[];
   // }[];
-  const [groups, setGroups] = useState([
+  const [groups] = useState([
     {
       groupId: 1,
       name: '테스트 그룹1',

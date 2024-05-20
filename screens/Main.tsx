@@ -21,7 +21,6 @@ export default function Main({ navigation }: any) {
   const setMyLocationToCurrentLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        console.log(position);
         setMyLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
